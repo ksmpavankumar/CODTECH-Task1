@@ -1,0 +1,40 @@
+module fsm_toggle (
+    input clk,        // Clock signal
+    input reset,      // Reset signal
+    input in,         // Input that controls state transitions
+    output reg out    // Output signal, active in state S1
+);
+
+    // State declaration
+    typedef enum reg [1:0] {S0, S1} state_t;
+    state_t current_state, next_state;
+
+    // State transition logic (combinational)
+    always @(*) begin
+        case (current_state)
+            S0: if (in) next_state = S1;
+                else next_state = S0;
+            S1: if (in) next_state = S0;
+                else next_state = S1;
+            default: next_state = S0; // Default to initial state
+        endcase
+    end
+
+    // State update logic (sequential)
+    always @(posedge clk or posedge reset) begin
+        if (reset) 
+            current_state <= S0;  // Initialize to S0 on reset
+        else 
+            current_state <= next_state;
+    end
+
+    // Output logic
+    always @(*) begin
+        case (current_state)
+            S0: out = 0;
+            S1: out = 1;
+            default: out = 0;
+        endcase
+    end
+
+endmodule
