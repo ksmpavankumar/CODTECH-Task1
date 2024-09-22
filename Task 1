@@ -38,3 +38,57 @@ module fsm_toggle (
     end
 
 endmodule
+module fsm_toggle_tb;
+
+    // Inputs
+    reg clk;
+    reg reset;
+    reg in;
+
+    // Outputs
+    wire out;
+
+    // Instantiate the FSM
+    fsm_toggle uut (
+        .clk(clk),
+        .reset(reset),
+        .in(in),
+        .out(out)
+    );
+
+    // Clock generation
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;  // Toggle clock every 5 time units
+    end
+
+    // Apply test stimulus
+    initial begin
+        // Initialize inputs
+        reset = 1;
+        in = 0;
+        
+        // Apply reset
+        #10 reset = 0;
+        
+        // Test case 1: Remain in S0 when input is 0
+        #10 in = 0;
+        #10 in = 0;
+        
+        // Test case 2: Toggle to S1 when input is 1
+        #10 in = 1;
+        #10 in = 1;
+
+        // Test case 3: Toggle back to S0
+        #10 in = 1;
+        
+        // End simulation
+        #20 $finish;
+    end
+
+    // Monitor changes
+    initial begin
+        $monitor("Time = %0t, reset = %b, in = %b, out = %b", $time, reset, in, out);
+    end
+
+endmodule
