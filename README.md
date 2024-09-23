@@ -1,11 +1,18 @@
 **Name:** Kodem Sai Manikhanta Pavan Kumar
+
 **Company** CODTECH IT SOLUTIONS
+
 **ID** CT08DS7596
+
 **Domain** VLSI
-**Duration** August to September 
+
+**Duration** August to September
+
 **Mentor** Neela Santhosh Kumar
 
-**Project Overview**: Design FSMs using Verilog or VHDL in the VLSI Software Environment
+**Project Overview**: 
+
+Design FSMs using Verilog or VHDL in the VLSI Software Environment
 This project involves designing Finite State Machines (FSMs) using Verilog or VHDL, two of the most widely used hardware description languages in the VLSI (Very Large Scale Integration) industry. The objective is to model a system with distinct states, transitions between states, and the associated outputs based on the current state and inputs.
 
 Project Goals
